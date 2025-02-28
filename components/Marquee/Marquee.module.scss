@@ -1,0 +1,33 @@
+// components/Marquee/Marquee.module.scss
+@use '../../app/base' as *;
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  margin-top: -6rem;
+  padding: 2rem 0;
+
+  &Inner {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .imageContainer {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .marqueeImage {
+    border-radius: 1rem;
+    width: 25vw;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: transform $transition-base;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}

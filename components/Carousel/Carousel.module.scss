@@ -1,0 +1,68 @@
+// Carousel.module.scss
+@use '../../app/base' as *;
+
+.crouselWrapper {
+  height: 130vh;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .crousel {
+    position: sticky;
+    top: 0;
+    margin-top: 30vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sliders {
+      display: flex;
+      gap: 1.6rem;
+      padding: 1rem 0;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      .slider {
+        flex-shrink: 0;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        transition: none;
+
+        img {
+          width: 66vw;
+          height: auto;
+          aspect-ratio: 16/9;
+          object-fit: cover;
+          display: block;
+        }
+
+        &.slider2 {
+          z-index: 2;
+        }
+
+        &.slider1,
+        &.slider3 {
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+
+// .crouselWrapper {
+//   height: 60vh;
+//   position: relative;
+//   width: 100%;
+//   overflow: hidden;
+
+//   .crousel {
+//     position: sticky;
+//     top: 0;
+//     margin-top: -30vh;
+//     height: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;

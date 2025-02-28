@@ -1,0 +1,43 @@
+// app/components.scss
+@use './base' as *;
+
+@media (max-width: $mobile) {
+  // Hero adjustments
+  .hero {
+    .content {
+      padding: 10rem 2rem;
+      justify-content: flex-start;
+      text-align: center;
+    }
+  }
+
+  // USP adjustments
+  .usp {
+    padding: 0 2rem 4rem;
+
+    .item {
+      max-width: 90%;
+      font-size: 4rem !important;
+    }
+  }
+
+  // Pricing cards stack
+  .pricing {
+    grid-template-columns: 1fr;
+    gap: $space-lg;
+  }
+
+  // Carousel mobile
+  .carousel {
+    .slider {
+      width: 90vw;
+    }
+  }
+
+  // Marquee mobile
+  .marquee {
+    img {
+      width: 80vw;
+    }
+  }
+}
