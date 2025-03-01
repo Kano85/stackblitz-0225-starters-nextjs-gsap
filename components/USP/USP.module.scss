@@ -29,6 +29,8 @@
     line-height: 1.1;
     margin: 2rem 0;
     max-width: 75%;
+    will-change: transform, opacity, filter; // Add will-change properties
+    transform-style: preserve-3d;
   }
 
   @media (max-width: 768px) {

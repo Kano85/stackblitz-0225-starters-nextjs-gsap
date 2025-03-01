@@ -1,46 +1,74 @@
+// components/Hero/Hero.tsx
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import styles from './Hero.module.scss';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!heroSectionRef.current) return;
-      // Get the bounding rectangle of the hero section
-      const rect = heroSectionRef.current.getBoundingClientRect();
-      // Calculate scroll progress (0 when the section is fully in view, 1 when it's off-screen)
-      const progress = Math.min(
-        Math.max((window.innerHeight - rect.top) / window.innerHeight, 0),
-        1
-      );
+  useGSAP(() => {
+    if (!heroSectionRef.current || !videoRef.current || !contentRef.current)
+      return;
 
-      if (videoRef.current) {
-        videoRef.current.style.opacity = String(1 - progress);
-      }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroSectionRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+        pin: true,
+        pinSpacing: false,
+        markers: true, // Keep markers for debugging
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+      },
+    });
 
-      if (contentRef.current) {
-        contentRef.current.style.opacity = String(1 - progress);
-        contentRef.current.style.transform = `translateY(-${progress * 80}px)`;
-      }
-    };
+    tl.addLabel('start');
 
-    window.addEventListener('scroll', handleScroll);
-    // Call initially in case the page isn't at the top
-    handleScroll();
+    // Video fade-out starts earlier in the scroll
+    tl.to(
+      videoRef.current,
+      {
+        opacity: 0,
+        ease: 'power1.in',
+      },
+      'start+=0' // Adjusted from 0.3 to start fade sooner
+    );
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    // Content fade starts earlier relative to video animation
+    tl.to(
+      contentRef.current,
+      {
+        opacity: 0,
+        y: -80,
+        ease: 'power2.out',
+        duration: 0.3,
+      },
+      'start+=0' // Adjusted from 0.2 to reduce overlap
+    );
+
+    tl.addLabel('end');
+  });
 
   return (
     <section className={styles.hero} ref={heroSectionRef}>
-      <video autoPlay muted loop className={styles.video} ref={videoRef}>
+      <video
+        autoPlay
+        muted
+        loop
+        className={styles.video}
+        ref={videoRef}
+        preload="auto"
+      >
         <source src="/videos/applevid.mp4" type="video/mp4" />
       </video>
       <div className={styles.content} ref={contentRef}>

@@ -1,3 +1,4 @@
+// components/USP/USP.tsx
 'use client';
 
 import { useRef } from 'react';
@@ -22,35 +23,43 @@ export default function USP() {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    // Removed background fade-in logic
-
-    // Animate text items with a scrubbed timeline (scroll driven)
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 80%',
-        end: 'top 20%',
+        start: 'top 60%', // Start animation later in scroll
+        end: 'top 10%', // Extend animation range
         toggleActions: 'play none none reverse',
-        markers: false, // For debugging; remove in production
-        scrub: 1,
+        markers: false,
+        scrub: 1.5, // Smoother scrubbing
       },
     });
 
-    itemsRef.current.forEach((item) => {
+    // Initial delay before first item appears
+    tl.to({}, { duration: 1 }); // 0.3 second delay
+
+    itemsRef.current.forEach((item, index) => {
       if (!item) return;
       tl.fromTo(
         item,
-        { opacity: 0, y: 80 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '+=0.2' // Stagger each animation by 0.2 seconds
+        {
+          opacity: 0,
+          y: 100, // Start further down
+          filter: 'blur(5px)', // Add blur effect
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.2, // Longer duration
+          ease: 'power4.out', // Smoother easing
+        },
+        index === 0 ? '>' : '+=0.15' // Smaller stagger between items
       );
     });
   });
 
   return (
     <div className={styles.usp} ref={containerRef}>
-      {/* Optional: Remove the background element if no longer needed */}
-      {/* <div className={styles.background} /> */}
       {USP_ITEMS.map((text, index) => (
         <p
           key={index}
