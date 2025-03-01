@@ -2,10 +2,14 @@
 @use '../../app/config' as *;
 
 .marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   position: relative;
   overflow: hidden;
   margin-top: -6rem;
-  padding: 2rem 0;
+  padding: 6rem;
+  padding-bottom: 6rem;
 
   &Inner {
     display: flex;

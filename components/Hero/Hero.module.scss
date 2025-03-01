@@ -28,8 +28,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 14rem 5rem;
+    padding: 40rem 5rem;
     opacity: 1;
     will-change: transform, opacity;
 
@@ -49,28 +48,6 @@
     .subtext {
       font-size: clamp(1.6rem, 2vw, 2.4rem);
       opacity: 0.9;
-    }
-  }
-
-  // Mobile styles moved here from global.scss
-  @include respond-to($mobile) {
-    .content {
-      padding: 10rem 2rem;
-      justify-content: flex-start;
-      text-align: center;
-
-      .heading {
-        margin-bottom: $space-md;
-      }
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .video,
-    .content,
-    .heading {
-      animation: none !important;
-      transition: none !important;
     }
   }
 }
