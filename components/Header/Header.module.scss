@@ -1,5 +1,5 @@
 // components/Header/Header.module.scss
-@use '../../app/base' as *;
+@use '../../app/config' as *;
 
 .header {
   background: $bg-color;

@@ -1,5 +1,6 @@
-// components/Hero/Hero.module.scss
-@use '../../app/base' as *;
+//components/Hero/Hero.module.scss
+
+@use '../../app/config' as *;
 
 .hero {
   position: relative;
@@ -51,9 +52,12 @@
     }
   }
 
-  @media (max-width: 768px) {
+  // Mobile styles moved here from global.scss
+  @include respond-to($mobile) {
     .content {
       padding: 10rem 2rem;
+      justify-content: flex-start;
+      text-align: center;
 
       .heading {
         margin-bottom: $space-md;

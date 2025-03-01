@@ -1,4 +1,6 @@
-@use '../../app/base' as *;
+//components/USP/USP.module.scss
+
+@use '../../app/config' as *;
 
 .usp {
   position: relative;
@@ -33,7 +35,8 @@
     transform-style: preserve-3d;
   }
 
-  @media (max-width: 768px) {
+  // Replace the media query with:
+  @include respond-to($mobile) {
     padding: 6rem 2rem;
 
     .item {

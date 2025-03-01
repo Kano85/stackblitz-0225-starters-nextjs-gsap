@@ -1,5 +1,5 @@
 // components/Pricing/Pricing.module.scss
-@use '../../app/base' as *;
+@use '../../app/config' as *;
 
 .pricing {
   width: 100%;
@@ -65,10 +65,10 @@
   }
 }
 
-// Responsive Adjustments
-@media (max-width: $mobile) {
+// Replace the media query at the bottom with:
+@include respond-to($mobile) {
   .pricing {
-    padding: $space-md 0; // reduce padding for mobile
+    padding: $space-md 0;
 
     .heading {
       font-size: clamp(2rem, 6vw, 3rem);
@@ -80,7 +80,7 @@
       align-items: center;
 
       .card {
-        max-width: 90%; // narrower cards on small screens
+        max-width: 90%;
       }
     }
   }

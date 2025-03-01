@@ -1,3 +1,5 @@
+//app/layout.tsx
+
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -6,7 +8,8 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import Header from '@/components/Header/Header';
-import './global.scss';
+import './globals.css';
+import './globals.scss';
 
 export default function RootLayout({
   children,

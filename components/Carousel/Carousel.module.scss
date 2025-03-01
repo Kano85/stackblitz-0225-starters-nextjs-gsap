@@ -1,5 +1,5 @@
 // Carousel.module.scss
-@use '../../app/base' as *;
+@use '../../app/config' as *;
 
 .crouselWrapper {
   height: 130vh;
@@ -51,18 +51,3 @@
     }
   }
 }
-
-// .crouselWrapper {
-//   height: 60vh;
-//   position: relative;
-//   width: 100%;
-//   overflow: hidden;
-
-//   .crousel {
-//     position: sticky;
-//     top: 0;
-//     margin-top: -30vh;
-//     height: 100vh;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
