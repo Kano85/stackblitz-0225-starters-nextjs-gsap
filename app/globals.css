@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Mori';
+    src: url('/fonts/Mori-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Global Reset */
+  * {
+    @apply m-0 p-0 box-border list-none;
+    text-decoration: none;
+  }
+
+  html {
+    @apply text-[62.5%] overflow-x-clip;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-light text-bg py-[1.2rem] px-[2.2rem] 
+           rounded-full text-[1.6rem] cursor-pointer 
+           border-none w-fit transition-all duration-base;
+  }
+}

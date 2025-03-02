@@ -1,12 +1,9 @@
-// components/Pricing/Pricing.tsx
-
 'use client';
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-import styles from './Pricing.module.scss';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -49,7 +46,7 @@ export default function Pricing() {
           opacity: 0,
           y: 50,
           duration: 0.6,
-          delay: i * 0.2, // stagger animations a bit
+          delay: i * 0.2,
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'top 70%',
@@ -63,19 +60,38 @@ export default function Pricing() {
   );
 
   return (
-    <section className={styles.pricing} ref={containerRef}>
-      <h2 className={styles.heading}>Apple TV+ Plans</h2>
-      <div className={styles.cardsWrapper}>
+    <section
+      className="w-full bg-bg py-lg relative z-[5] max-md:py-md"
+      ref={containerRef}
+    >
+      <h2
+        className="text-light text-center mb-md max-md:mb-sm"
+        style={{ fontSize: 'clamp(3rem, 5vw, 5rem)' }}
+      >
+        Apple TV+ Plans
+      </h2>
+
+      <div className="flex flex-wrap justify-center gap-lg max-md:flex-col max-md:items-center">
         {PRICING_CARDS.map((card, index) => (
           <div
             key={index}
             ref={(el) => el && (cardsRef.current[index] = el)}
-            className={styles.card}
+            className="flex-1 bg-light/10 rounded-[2rem] p-lg backdrop-blur-lg text-left flex flex-col justify-between min-w-[30rem] max-w-[38rem] max-md:max-w-[90%]"
           >
-            <h3 className={styles.title}>{card.title}</h3>
-            <p className={styles.subtitle}>{card.subtitle}</p>
-            <p className={styles.text}>{card.text}</p>
-            <button className={styles.button}>{card.button}</button>
+            <h3
+              className="text-light mb-sm"
+              style={{ fontSize: 'clamp(2rem, 2.5vw, 3rem)' }}
+            >
+              {card.title}
+            </h3>
+
+            <p className="text-light/80 text-[1.8rem] mb-sm">{card.subtitle}</p>
+
+            <p className="text-muted leading-[1.4] text-[1.6rem]">
+              {card.text}
+            </p>
+
+            <button className="btn-primary mt-md">{card.button}</button>
           </div>
         ))}
       </div>

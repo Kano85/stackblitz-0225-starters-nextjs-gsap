@@ -9,7 +9,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import Header from '@/components/Header/Header';
 import './globals.css';
-import './globals.scss';
 
 export default function RootLayout({
   children,
@@ -44,10 +43,12 @@ export default function RootLayout({
           content="Apple TV+ Clone with GSAP Animations"
         />
       </head>
-      <body>
+      <body className="bg-bg text-light font-body leading-[1.5] overflow-x-hidden">
         <Header />
-        <div id="smooth-wrapper">
-          <div id="smooth-content">{children}</div>
+        <div id="smooth-wrapper" className="overflow-hidden w-full h-full">
+          <div id="smooth-content" className="will-change-transform">
+            {children}
+          </div>
         </div>
       </body>
     </html>

@@ -1,8 +1,6 @@
-// components/Marquee/Marquee.tsx
 'use client';
 import { useRef, useLayoutEffect } from 'react';
 import Image from 'next/image';
-import styles from './Marquee.module.scss';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 
@@ -28,7 +26,6 @@ export default function Marquee() {
         0
       );
 
-      // Double the content for seamless looping
       gsap.set(element, { width: totalWidth * 2 });
 
       const tl = gsap.timeline({
@@ -63,37 +60,43 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className={styles.marquee} id="next-section">
-      <div ref={marquee1Ref} className={styles.marqueeInner}>
+    <div
+      className="relative flex flex-col gap-8 overflow-hidden -mt-24 p-24"
+      id="next-section"
+    >
+      {/* First Marquee Row */}
+      <div ref={marquee1Ref} className="flex gap-4 w-max will-change-transform">
         {[...images, ...images, ...images, ...images].map((img, i) => (
           <div
             key={`m1-${i}`}
-            className={`${styles.imageContainer} imageContainer`}
+            className="imageContainer flex-shrink-0 relative"
           >
             <Image
               src={img.src}
               alt=""
               width={img.width}
               height={img.height}
-              className={styles.marqueeImage}
+              className="rounded-xl w-[25vw] aspect-video object-cover transition-transform duration-300 hover:scale-[1.02]"
               priority={i < 4}
             />
           </div>
         ))}
       </div>
-      <div ref={marquee2Ref} className={styles.marqueeInner}>
+
+      {/* Second Marquee Row (Reversed) */}
+      <div ref={marquee2Ref} className="flex gap-4 w-max will-change-transform">
         {[...images].reverse().map((img, i, arr) =>
           [...arr, ...arr, ...arr, ...arr].map((img, j) => (
             <div
               key={`m2-${j}`}
-              className={`${styles.imageContainer} imageContainer`}
+              className="imageContainer flex-shrink-0 relative"
             >
               <Image
                 src={img.src}
                 alt=""
                 width={img.width}
                 height={img.height}
-                className={styles.marqueeImage}
+                className="rounded-xl w-[25vw] aspect-video object-cover transition-transform duration-300 hover:scale-[1.02]"
                 priority={j < 4}
               />
             </div>

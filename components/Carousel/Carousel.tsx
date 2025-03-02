@@ -1,4 +1,3 @@
-// components/Carousel/Carousel.tsx
 'use client';
 
 import { gsap } from 'gsap';
@@ -6,7 +5,6 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import Image from 'next/image';
-import styles from './Carousel.module.scss';
 
 const SLIDER_IMAGES = [
   { src: '/images/image-2.jpg', width: 800, height: 450 },
@@ -26,7 +24,6 @@ export default function Carousel() {
       if (!slider1Ref.current || !slider2Ref.current || !slider3Ref.current)
         return;
 
-      // Initial setup
       gsap.set(slider2Ref.current, {
         scale: 3.5,
         transformOrigin: 'center center',
@@ -37,7 +34,6 @@ export default function Carousel() {
         x: 0,
       });
 
-      // Scroll animation
       ScrollTrigger.create({
         trigger: slider2Ref.current,
         start: 'top 80%',
@@ -46,20 +42,14 @@ export default function Carousel() {
         scrub: true,
         onUpdate: (self) => {
           const scale = gsap.utils.mapRange(0, 1, 3.5, 1, self.progress);
-
-          gsap.set(slider2Ref.current, {
-            scale: scale,
-            overwrite: 'auto',
-          });
-
+          gsap.set(slider2Ref.current, { scale });
           gsap.to([slider1Ref.current, slider3Ref.current], {
             opacity: self.progress,
             x: 0,
             ease: 'power2.out',
-            overwrite: true,
           });
         },
-        onRefresh: (self) => {
+        onRefresh: () => {
           gsap.set(slider2Ref.current, { scale: 3.5 });
           gsap.set([slider1Ref.current, slider3Ref.current], {
             opacity: 0,
@@ -74,47 +64,52 @@ export default function Carousel() {
   }, []);
 
   return (
-    <section className={styles.crouselWrapper}>
-      <div className={styles.crousel}>
-        <div className={styles.sliders}>
+    <section className="h-[130vh] relative w-full overflow-hidden">
+      <div className="sticky top-0 mt-[30vh] h-screen flex items-center justify-center">
+        <div className="flex gap-4 py-4 h-screen items-center justify-center w-full">
+          {/* Slider 1 */}
           <div
             ref={slider1Ref}
-            className={`${styles.slider} ${styles.slider1}`}
+            className="flex-shrink-0 rounded-xl overflow-hidden z-[1]"
           >
             <Image
               src={SLIDER_IMAGES[0].src}
               alt="Slider Image 1"
               width={800}
               height={450}
-              className={styles.sliderImage}
+              className="w-[66vw] aspect-video object-cover block"
               priority
               unoptimized
             />
           </div>
+
+          {/* Slider 2 */}
           <div
             ref={slider2Ref}
-            className={`${styles.slider} ${styles.slider2}`}
+            className="flex-shrink-0 rounded-xl overflow-hidden z-[2]"
           >
             <Image
               src={SLIDER_IMAGES[1].src}
               alt="Slider Image 2"
               width={800}
               height={450}
-              className={styles.sliderImage}
+              className="w-[66vw] aspect-video object-cover block"
               priority
               unoptimized
             />
           </div>
+
+          {/* Slider 3 */}
           <div
             ref={slider3Ref}
-            className={`${styles.slider} ${styles.slider3}`}
+            className="flex-shrink-0 rounded-xl overflow-hidden z-[1]"
           >
             <Image
               src={SLIDER_IMAGES[2].src}
               alt="Slider Image 3"
               width={800}
               height={450}
-              className={styles.sliderImage}
+              className="w-[66vw] aspect-video object-cover block"
               priority
               unoptimized
             />
